@@ -1,8 +1,12 @@
 inlog gegevens:
-Username/emial = Admin
-Password = Password
+Geberuiker 1:
+Geberuikersnaam : Jelle
+Wachtwoord : password
+Geberuiker 2:
+Gebruikersnaam: Mark
+Wachtwoord: secret123
 
 Link to website
 
-https://php-opdracht.herokuapp.com/
+https://webdev-jelle-koomen.000webhostapp.com/
 
