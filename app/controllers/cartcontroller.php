@@ -13,9 +13,11 @@ class cartController
     public function index()
     {
         //Makes the array suitible for the qeury by imploding it
-        $selection = implode(',', $_SESSION['cart']);
-        if(!empty($selection)){
-            $model = $this->articleService->selectaricles($selection);
+        if(isset($_SESSION['cart'])){
+            $selection = implode(',', $_SESSION['cart']);
+            if(!empty($selection)){
+                $model = $this->articleService->selectaricles($selection);
+            }
         }
         require __DIR__ . '/../views/cart/index.php';
     }

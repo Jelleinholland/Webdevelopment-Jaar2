@@ -3,8 +3,16 @@ include __DIR__ . '/../header.php';
 include __DIR__ . '/../footer.php';
 ?>
 <section class="text-center bg-light">
-<h1 class="fw-light">Artikel pagina!</h1>
+<h1 class="fw-light">Winkelmandje pagina!</h1>
 <h2 class="fw-light">Op deze pagina kan je de winkelmand inzien en de artikelen bestellen!</h2>
+<?
+if(!isset($_SESSION['username']))
+{
+?>
+<h2 class="fw-light">Om te kunnen bestellen moet je inloggen!</h2>
+<?php
+}
+?>
 </section>
 <div class="cart-button-container">
 <?php
