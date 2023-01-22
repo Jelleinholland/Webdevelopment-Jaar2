@@ -10,15 +10,14 @@ if(isset($_SESSION['isloggedin']))
 ?>
 <script>
         function Fetcharticles(){
-            
+            //getting the articles by using the api
             fetch('http://localhost/api/article')
             .then(result => result.json())
             .then(articles => {
-                //console.log('test');
                 articles.forEach(article => {
                     
+                    //creating the html elements
                     const container = document.createElement('div');
-                    //container.classname = "article-element";
                     container.classList.add("slider-element");
                     const header = document.createElement('h2');
                     const articleAuthor = document.createElement('p');
@@ -27,24 +26,24 @@ if(isset($_SESSION['isloggedin']))
                     const paragraph = document.createElement('p');
                     const editButton = document.createElement('button')
                     const deleteButton = document.createElement('button')
-                    
+                    //add classes to the elements
                     editButton.classList.add("edit-button");
                     deleteButton.classList.add("delete-button");
                     editButton.innerText = "Edit article";
                     deleteButton.innerText = "Delete article";
-
+                    //declare varbale
                     let articleTitle = article.title;
-
+                    //giving the butttons a action
                     deleteButton.onclick = function () { location.href = "/article/articleDelete?id=" + article.id};
                     editButton.onclick = function () { location.href = "/article/getOne?id=" + article.id};
                     
-
+                    //giving the elements values
                     articleAuthor.innerHTML = article.author;
                     header.innerHTML = article.title;
                     posted_at.innerHTML = article.posted_at;    
                     paragraph.innerHTML = article.content;
                     posted_at_container.appendChild(posted_at);
-
+                    //add the elements to the main conatiner
                     container.appendChild(header);
                     container.appendChild(posted_at_container);
                     container.appendChild(articleAuthor);
@@ -56,7 +55,6 @@ if(isset($_SESSION['isloggedin']))
                     document.getElementById('articlecontainer').appendChild(container);
                     
                 });
-                console.log(articles)
             })
             .catch(error => console.log(error));
         }
