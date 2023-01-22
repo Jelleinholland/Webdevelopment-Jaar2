@@ -12,6 +12,7 @@ class adminarticleController
 
     public function index()
     {
+        //Get the articles from the database when the page is loaded
         $articles = $this->articleService->getAll();
         require __DIR__ . '/../views/adminarticle/index.php';
     }

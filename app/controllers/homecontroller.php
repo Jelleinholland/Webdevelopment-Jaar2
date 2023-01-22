@@ -12,14 +12,8 @@ class HomeController
     public function index()
     {
         require __DIR__ . '/../views/home/index.php';
+        //when the user is logged in the id of the user is stored in a session variable
         $user = $this->loginservice->getOne($_SESSION['username']);
-
-        foreach($user as $users){
-          echo  $user->id;
-        }
         $_SESSION['idUser'] = array_column($user, 'User_ID');
-        //var_dump($_SESSION['idUser']);
-        //var_dump($user[0]);
-        //echo $user->Username;
     }
 }

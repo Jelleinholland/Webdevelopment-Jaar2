@@ -1,19 +1,6 @@
 <?php
 error_reporting(0);
 session_start();
-// function checkLoggedin(){
-//   if (isset($_SESSION['login'])) {
-//     return true;
-//   }else {
-//     return false;
-//   }
-// }
-// session_start();
-//    unset($_SESSION["username"]);
-//    unset($_SESSION["password"]);
-   
-//    echo 'You have cleaned session';
-//    header('Refresh: 2; URL = login.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

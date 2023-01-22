@@ -6,28 +6,21 @@ class ArticleController
 
     private $articleService;
 
+    //initialize services
     function __construct()
     {
         $this->articleService = new ArticleService();
     }
-
     public function index()
     {
-        $model = $this->articleService->getAll();
-
         require __DIR__ . '/../views/article/index.php';
     }
+    //Get the article from the DB that the user intends to update
     public function getOne(){
         $update_id = $_GET['id'];
         $model = $this->articleService->getOne($update_id);
         require __DIR__ . '/../views/updatingarticle/index.php';
         return $model;
-    }
-    public function single()
-    {
-        $model = $this->articleService->getAll();
-
-        require __DIR__ . '/../views/article/single.php';
     }
     public function addingarticle()
     {
@@ -43,6 +36,7 @@ class ArticleController
     }
     public function articleAdd()
     {
+            //Sanitize the intput from the user
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW); 
 
             // check all individual post fields
@@ -70,7 +64,9 @@ class ArticleController
     public function articleUpdate()
     {
         try{
+                //setting variables
                 $id = $_SESSION['updatingid'];
+                // check all individual post fields & sanitize them
                 if (isset($_POST['title'])) {
                     $title =  htmlspecialchars($_POST['title']);
                 }
@@ -82,6 +78,7 @@ class ArticleController
                 if (isset($_POST['content'])) {
                     $content = htmlspecialchars($_POST['content']);
                 }
+                //with the checked & sanitized variables the article is updated
                 $this->articleService->updatearticle($id, $title, $author, $content);
                 header('Location: /adminarticle');
         }
@@ -93,22 +90,19 @@ class ArticleController
      
     public function articleDelete()
     {
+        //detele the article with the id of the selected article
         $submit_id = $_GET['id'];
         $this->articleService->deletearticle($submit_id);
+        header('Location: /adminarticle');
     }
-
     public function addToCart()
     {   
-        
-            if(empty($_SESSION["cart"])){
-                $_SESSION["cart"]=array();
-            }
+        //checks if the variable is empty   
+        if(empty($_SESSION["cart"])){
+            //if the variable is empty the array is initialized
+            $_SESSION["cart"]=array();
+        }
         array_push($_SESSION['cart'],$_GET['id']);
-        
-        // $cartArray = array();
-        // $_SESSION["cart"]=array();
-        // $article_id = $_GET['id'];
-        // array_push($_SESSION['cart'],$article_id);
         header('Location: /article');
     }
     

@@ -12,9 +12,9 @@ class ArticleController{
 
         if($_SERVER['REQUEST_METHOD']==='GET')
         {
+            //getting the articles from the database
             $articles = $this->articleService->getAll();
             echo json_encode($articles);
-            //var_dump($articles);
         }
     }
 }

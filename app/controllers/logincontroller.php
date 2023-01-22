@@ -13,41 +13,29 @@ class LoginController
     public function index()
     {
         require __DIR__ . '/../views/login/index.php';
-        $wachtwoord = "secret123";
-        
-        //echo password_hash($wachtwoord, PASSWORD_DEFAULT);
     }
-
     public function login()
     {
+        //sanitize the variables
         if(isset($_POST['login'])){
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
 
             $Username = htmlspecialchars($_POST['Username']);
             $Password = htmlspecialchars($_POST['Password']);
-            //$amountrows = $this->loginservice->AttemptToLogin($Username, $Password);
 
+            //Validate the login attempt
             $data = $this->loginservice->AttemptToLogin($Username);
-            
+            //if the password is correct the variables are assinged
             if (password_verify($Password, $data[0][1])) {
                 $_SESSION['isloggedin'] = "True";
                 $_SESSION['username'] = $Username;
-                //$this->setPermission($this->authService->getRole($userName));
                 header('Location: /');
             } else { // give error
                 header('location: /login?error=failed-to-login');
             }
-        
-            // if($amountrows > 0){
-            //         header('Location: /');
-            //         $_SESSION['username'] = $Username;
-            //         $_SESSION['isloggedin'] = "True";
-            // }
-            // else { 
-            //     header('location: /login?error=failed-to-login');
-            // }
         }
     }
+    //unset and destroy the sessions
     public function loguit(){
         session_unset();
         session_destroy();

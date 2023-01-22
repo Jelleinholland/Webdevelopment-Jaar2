@@ -2,8 +2,7 @@
 require __DIR__ . '/repository.php';
 
 class LoginRepository extends Repository{
-
-//echo "<h1>Loginpage!</h1>";
+//getting one user from data base to validate the login
 function AttemptToLogin($Username){
     try{
         if (!empty($Username)){
@@ -11,31 +10,22 @@ function AttemptToLogin($Username){
             $stament = $this->connection->prepare($sqlquery);
     
             $stament->bindParam(':Username', $Username);
-            //$stament->bindParam(':Password', $Password);
     
             $stament->execute();
-
-            //$rowCount = $stament->fetchColumn();
-            
-            
             return $stament->fetchAll();
-        
-            //return $rowCount;
-    
-            //var_dump($Username);
         }
     }
     catch (PDOException $e){
         echo $e;
     }
 }
+//Get one user for accesing the data of the loggedin user
 public function getOne($username){
     try {
         $stmt = $this->connection->prepare("SELECT * FROM User WHERE Username =:username");
         $stmt->bindParam(':username', $username);
         $stmt->execute();
 
-        //$stmt->setFetchMode(PDO::FETCH_CLASS, 'user');
         $user = $stmt->fetchAll();
 
         return $user;

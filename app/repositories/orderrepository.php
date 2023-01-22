@@ -4,7 +4,7 @@ require __DIR__ . '/../models/article.php';
 require __DIR__ . '/../models/order.php';
 
 class OrderRepository extends Repository{
-
+    //inserting a order based on the data from the cart
     public function insertOrder($Selection, $UserID, $Price){
         try {
             $sqlquery = "INSERT INTO Bestelling (User_ID, Products, Price) VALUES (:User_ID, :Products, :Price)";
@@ -21,6 +21,7 @@ class OrderRepository extends Repository{
             echo $e;
         }
     }
+    //get the orders from the currently loggedin user
     public function Getorders($id){
         try {
             $stmt = $this->connection->prepare("SELECT * FROM Bestelling WHERE User_ID = :id");
@@ -38,10 +39,10 @@ class OrderRepository extends Repository{
             echo $e;
         }
     }
+    //get the articles from the orders of the currently loggedin user
     public function SelectArticle($selection){
         try {
             $stmt = $this->connection->prepare("SELECT * FROM article WHERE id IN ({$selection})");
-            //$stmt->bindParam(':selection', $selection);
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Article');

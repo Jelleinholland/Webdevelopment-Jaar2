@@ -6,13 +6,6 @@ class Order
     public string $products;
     public int $price;
 
-    // public function __construct(string $products){
-    //     //$this->orderid = $orderid;
-    //     //$this->userid = $userid;
-    //     $this->products = $products;
-    //    // $this->price = $price;
-    // }
-
     /**
      * Get the value of products
      */ 
